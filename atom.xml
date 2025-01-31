@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Fantasy</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2025-01-31T14:48:17.152Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Cellar Cordial</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Render Hardware Interface</title>
+    <link href="http://example.com/2025/01/31/Render%20Hardware%20Interface/"/>
+    <id>http://example.com/2025/01/31/Render%20Hardware%20Interface/</id>
+    <published>2025-01-31T14:48:17.000Z</published>
+    <updated>2025-01-31T14:48:17.152Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+</feed>

@@ -121,11 +121,10 @@
   </h1>
   <div class="content markdown-body">
     <p>Render Hardware Interface（RHI）简单来说就是一个抽象层，它位于游戏引擎或图形应用和底层图形API（比如DirectX、Vulkan、Metal等）之间，主要作用就是让开发者不用直接去碰那些复杂又容易出错的底层API，而是通过一个统一的接口去操作GPU，同时可以更方便地支持跨平台运行。这里主要参考 nvrhi 来构建一个支持 dx12 和 vulkan 的 RHI.</p>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><img src="Render Hardware Interface/0.png" alt="">
-
+<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true" alt="0.png"></p>
 <p>根据图形管线的每个阶段, 我们分别建立相应的接口或数据结构.</p>
 <h3 id="Input-Assembler-Vertex-Input"><a href="#Input-Assembler-Vertex-Input" class="headerlink" title="Input Assembler (Vertex Input)"></a>Input Assembler (Vertex Input)</h3><p>由于在不同的情况下, 我们需要向 Vertex Shader 提交不同类型的自定义 Vertex 结构体, 因此需要向 pipeline 描述自定义的顶点格式. </p>
-<img src="Render Hardware Interface/1.png" alt="1" style="zoom:50%;" />
+<img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/1.png?raw=true" alt="1.png" style="zoom:67%;" />
 
 <ul>
 <li><p><strong>name</strong>: DX12 中需要指定与顶点结构体元素相关联的字符串, 为 D3D12_INPUT_ELEMENT_DESC::SemanticName.</p>
@@ -156,59 +155,15 @@
 <p>在初始化中，将输入的 VertexAttributeDesc 遍历并转换为 D3D12_INPUT_ELEMENT_DESC，与 Vulkan 不同的是，DX12 不需要 VertexAttributeDesc 中的 element_stride。</p>
 <p>同时检查相同 buffe_index 的 VertexAttributeDesc，其 element_stride 也必须相同，即指定同一个 vertex buffer 的所有 VertexAttributeDesc，其所归属的 Vertex 结构体必须相同。</p>
 <p>另外也会将根据 array_size 进行铺平，就是按照 array_size 所指定的数量将同一个 VertexAttributeDesc 复制 array_size 份转换为 D3D12_INPUT_ELEMENT_DESC，每个的 SemanticIndex 递增。</p>
-<img src="..\images\Render Hardware Interface\2.png" alt="2" style="zoom:65%;" />
+<img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/2.png?raw=true" alt="2.png" style="zoom:67%;" />
 
-<img src="..\images\Render Hardware Interface\3.png" alt="2" style="zoom:60%;" />
-
+<p><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/3.png?raw=true" alt="3.png"></p>
 <h4 id="Vulkan"><a href="#Vulkan" class="headerlink" title="Vulkan"></a>Vulkan</h4><p>Vulkan 实现 InputLayoutInterface，私有成员需要包含 vk::VertexInputBindingDescription 和 vk::VertexInputAttributeDescription 的数组。与 DX12 不同的是，D3D12_INPUT_ELEMENT_DESC 直接包含了输入装配所需要的所有单个数据，而 Vulkan 将其分成了 vk::VertexInputBindingDescription 和 vk::VertexInputAttributeDescription，前者包含了 buffer_index、 element_stride （DX12 无需此项）、is_instanced，后者包含了 buffer_index、format、offset、array_size。另外，在 DX12 中，array_size 是分开平铺，而 Vulkan中是整体平铺。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// array_size 在 DX12 中对应 SemanticIndex, 在 Vulkan 中对应 location。</span><br><span class="line">struct VertexInput</span><br><span class="line">&#123;</span><br><span class="line">	float3 position : POSITION;	// array_size 为 1, SemanticIndex 为 0, location 为 0.</span><br><span class="line">	float3 normal : NORMAL;		// array_size 为 1, SemanticIndex 为 0, location 为 1.</span><br><span class="line">	float2 uv0 : TEXCOORD0;		// array_size 为 3, SemanticIndex 为 0, location 为 2.</span><br><span class="line">	float2 uv1 : TEXCOORD1;		// 					SemanticIndex 为 1, location 为 3. (复制递增)</span><br><span class="line">	float2 uv2 : TEXCOORD2;		// 					SemanticIndex 为 2, location 为 4. (复制递增)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<img src="..\images\Render Hardware Interface\4.png" alt="2" style="zoom:65%;" />
+<img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/4.png?raw=true" alt="4.png" style="zoom:67%;" />
 
-<img src="..\images\Render Hardware Interface\5.png" alt="2" style="zoom:100%;" />
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/5.png?raw=true" alt="5.png"></p>
 
   </div>
   

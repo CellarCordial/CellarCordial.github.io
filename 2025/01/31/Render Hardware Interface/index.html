@@ -121,10 +121,10 @@
   </h1>
   <div class="content markdown-body">
     <p>Render Hardware Interface（RHI）简单来说就是一个抽象层，它位于游戏引擎或图形应用和底层图形API（比如DirectX、Vulkan、Metal等）之间，主要作用就是让开发者不用直接去碰那些复杂又容易出错的底层API，而是通过一个统一的接口去操作GPU，同时可以更方便地支持跨平台运行。这里主要参考 nvrhi 来构建一个支持 dx12 和 vulkan 的 RHI.</p>
-<h4 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h4><p>![0](images\Render Hardware Interface\0.png)</p>
+<h4 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h4><p>![0](..&#x2F;images&#x2F;Render Hardware Interface&#x2F;0.png)</p>
 <p>根据图形管线的每个阶段, 我们分别建立相应的接口或数据结构.</p>
 <h5 id="Input-Assembler-Vertex-Input"><a href="#Input-Assembler-Vertex-Input" class="headerlink" title="Input Assembler (Vertex Input)"></a>Input Assembler (Vertex Input)</h5><p>由于在不同的情况下, 我们需要向 Vertex Shader 提交不同类型的自定义 Vertex 结构体, 因此需要向 pipeline 描述自定义的顶点格式. </p>
-<img src="images\Render Hardware Interface\1.png" alt="1" style="zoom:50%;" />
+<img src="../..\imagesRender Hardware Interface\1.png" alt="1" style="zoom:50%;" />
 
 <ul>
 <li><p><strong>name</strong>: DX12 中需要指定与顶点结构体元素相关联的字符串, 为 D3D12_INPUT_ELEMENT_DESC::SemanticName.</p>
@@ -185,7 +185,7 @@ struct VertexInput
 </ul>
 </li>
 </ul>
-<h6 id="DX12"><a href="#DX12" class="headerlink" title="DX12"></a>DX12</h6><img src="images\Render Hardware Interface\2.png" alt="2" style="zoom:60%;" />
+<h6 id="DX12"><a href="#DX12" class="headerlink" title="DX12"></a>DX12</h6><img src="..\images\Render Hardware Interface\2.png" alt="2" style="zoom:60%;" />
 
 <p>其 initialize() 的思路是, 将 VertexAttributeDescArray 复制到 _vertex_attribute_descs 中, 并根据其数据填充 _d3d12_input_element_descs.</p>
 

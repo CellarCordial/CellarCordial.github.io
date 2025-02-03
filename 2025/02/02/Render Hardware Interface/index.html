@@ -24,8 +24,10 @@
 <meta property="og:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/5.png?raw=true">
 <meta property="og:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/6.png?raw=true">
 <meta property="og:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/7.png?raw=true">
+<meta property="og:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/8.png?raw=true">
+<meta property="og:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/9.png?raw=true">
 <meta property="article:published_time" content="2025-02-02T03:50:14.000Z">
-<meta property="article:modified_time" content="2025-02-02T05:55:43.261Z">
+<meta property="article:modified_time" content="2025-02-02T08:43:47.689Z">
 <meta property="article:author" content="Cellar Cordial">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true">
@@ -149,7 +151,7 @@
                     <div class="article-entry" itemprop="articleBody">
                         
                         <html><head></head><body><p>Render Hardware Interface（RHI）简单来说就是一个抽象层，它位于游戏引擎或图形应用和底层图形API（比如DirectX、Vulkan、Metal等）之间，主要作用就是让开发者不用直接去碰那些复杂又容易出错的底层API，而是通过一个统一的接口去操作GPU，同时可以更方便地支持跨平台运行。这里主要参考 nvrhi 来构建一个支持 dx12 和 vulkan 的 RHI，shader 语言我们使用 nvidia 的 slang。</p>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a class="magnific-img" target="_blank" rel="noopener" href="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true"><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true" alt="0.png" class="ui centered image"></a></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h2><h2 id="Binding-Layout"><a href="#Binding-Layout" class="headerlink" title="Binding Layout"></a>Binding Layout</h2><h2 id="Graphics-Pipeline"><a href="#Graphics-Pipeline" class="headerlink" title="Graphics Pipeline"></a>Graphics Pipeline</h2><p><a class="magnific-img" target="_blank" rel="noopener" href="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true"><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/0.png?raw=true" alt="0.png" class="ui centered image"></a></p>
 <p>根据图形管线的每个阶段, 我们分别建立相应的接口或数据结构.</p>
 <h3 id="Input-Assembler-Vertex-Input"><a href="#Input-Assembler-Vertex-Input" class="headerlink" title="Input Assembler (Vertex Input)"></a>Input Assembler (Vertex Input)</h3><p>由于在不同的情况下, 我们需要向 Vertex Shader 提交不同类型的自定义 Vertex 结构体, 因此需要向 pipeline 描述自定义的顶点格式. </p>
 <img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/1.png?raw=true" alt="1.png" style="zoom:67%;">
@@ -192,7 +194,7 @@
 <img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/4.png?raw=true" alt="4.png" style="zoom:67%;">
 
 <p><a class="magnific-img" target="_blank" rel="noopener" href="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/5.png?raw=true"><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/5.png?raw=true" alt="5.png" class="ui centered image"></a></p>
-<h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h3><p>DX12 中指定 shader 只需要 shader 的字节码和长度，而 vulkan 的描述接口体中还需要 shader 入口。</p>
+<h3 id="Primitive-Topology"><a href="#Primitive-Topology" class="headerlink" title="Primitive Topology"></a>Primitive Topology</h3><h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h3><p>DX12 中指定 shader 只需要 shader 的字节码和长度，而 vulkan 的描述接口体中还需要 shader 入口。</p>
 <p>我们先定义一个枚举类和两个结构体如下。</p>
 <img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/6.png?raw=true" alt="6.png" style="zoom: 50%;">
 
@@ -211,7 +213,12 @@
 
 
 
-<h3 id="Rasterizer"><a href="#Rasterizer" class="headerlink" title="Rasterizer"></a>Rasterizer</h3><h3 id="Primitive-Topology"><a href="#Primitive-Topology" class="headerlink" title="Primitive Topology"></a>Primitive Topology</h3></body></html>
+<h3 id="Rasterizer"><a href="#Rasterizer" class="headerlink" title="Rasterizer"></a>Rasterizer</h3><p><a class="magnific-img" target="_blank" rel="noopener" href="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/8.png?raw=true"><img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/8.png?raw=true" alt="8.png" class="ui centered image"></a></p>
+<p>Rasterizer State 我们可以分为三个部分，Blend State，Depth Stencil State 和总体控制的 Raster State。我们把三者组成一个结构体。</p>
+<img src="https://github.com/CellarCordial/CellarCordial.github.io/blob/master/images/Render%20Hardware%20Interface/9.png?raw=true" alt="9.png" style="zoom:75%;">
+
+<p>接下来分别介绍：</p>
+<h4 id="Blend-State"><a href="#Blend-State" class="headerlink" title="Blend State"></a>Blend State</h4><h2 id="Command-List"><a href="#Command-List" class="headerlink" title="Command List"></a>Command List</h2><h2 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h2></body></html>
                         
                     </div>
 
@@ -261,7 +268,7 @@
 
                 <div class="ui sticky article-toc" id="article-toc">
                     <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#Pipeline"><span>Pipeline</span></a><ol><li><a href="#Input-Assembler-Vertex-Input"><span>Input Assembler (Vertex Input)</span></a><ol><li><a href="#DX12"><span>DX12</span></a></li><li><a href="#Vulkan"><span>Vulkan</span></a></li></ol></li><li><a href="#Shader"><span>Shader</span></a><ol><li><a href="#DX12-1"><span>DX12</span></a></li><li><a href="#Vulkan-1"><span>Vulkan</span></a></li></ol></li><li><a href="#Rasterizer"><span>Rasterizer</span></a></li><li><a href="#Primitive-Topology"><span>Primitive Topology</span></a></li></ol></li></ol>
+                    <ol class="ui ordered list"><li><a href="#"><span></span></a></li><li><a href="#Resource"><span>Resource</span></a></li><li><a href="#Binding-Layout"><span>Binding Layout</span></a></li><li><a href="#Graphics-Pipeline"><span>Graphics Pipeline</span></a><ol><li><a href="#Input-Assembler-Vertex-Input"><span>Input Assembler (Vertex Input)</span></a><ol><li><a href="#DX12"><span>DX12</span></a></li><li><a href="#Vulkan"><span>Vulkan</span></a></li></ol></li><li><a href="#Primitive-Topology"><span>Primitive Topology</span></a></li><li><a href="#Shader"><span>Shader</span></a><ol><li><a href="#DX12-1"><span>DX12</span></a></li><li><a href="#Vulkan-1"><span>Vulkan</span></a></li></ol></li><li><a href="#Rasterizer"><span>Rasterizer</span></a><ol><li><a href="#Blend-State"><span>Blend State</span></a></li></ol></li></ol></li><li><a href="#Command-List"><span>Command List</span></a></li><li><a href="#Device"><span>Device</span></a></li></ol>
                 </div>
 
             </div>
